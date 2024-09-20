@@ -13,5 +13,21 @@
  */
 
 export default function convertBytesToHuman(bytes) {
-  // your solution goes here
+  if (
+      typeof bytes !== "number"
+      || bytes < 0
+      || !Number.isFinite(bytes)
+  ) return false
+
+  if (bytes === 0) return '0 B';
+
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+  const sizeIndex = Math.floor(Math.log(bytes) / Math.log(1024));
+  const humanReadableSize = (bytes / Math.pow(1024, sizeIndex));
+
+  const formattedSize = humanReadableSize % 1 === 0
+      ? `${Math.round(humanReadableSize)}`
+      : `${humanReadableSize.toFixed(2)}`;
+
+  return `${formattedSize} ${sizes[sizeIndex]}`;
 }

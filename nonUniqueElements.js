@@ -25,6 +25,10 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
  */
 
 export default function nonUniqueElements(data) {
-  // your solution goes here
-  return data
+  const counts = data.reduce((acc, value) => {
+    acc[value] = (acc[value] || 0) + 1;
+    return acc;
+  }, {});
+
+  return data.filter(value => counts[value] > 1);
 }
