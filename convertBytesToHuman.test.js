@@ -14,7 +14,13 @@ test('Возвращает false для строк', () => {
   expect(convertBytesToHuman('string')).toBe(false);
 });
 
-test('Возвращает false для объектов и других типов', () => {
+test('Возвращает false для объектов, массивов и функций', () => {
+  expect(convertBytesToHuman([54845, 15418, 85485])).toBe(false);
+  expect(convertBytesToHuman({number: 18181, string: '1618998'})).toBe(false);
+  expect(convertBytesToHuman(function a (b) {return b * b})).toBe(false);
+});
+
+test('Возвращает false для других типов', () => {
   expect(convertBytesToHuman(null)).toBe(false);
   expect(convertBytesToHuman(undefined)).toBe(false);
   expect(convertBytesToHuman(NaN)).toBe(false);
